@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         // 4. 启动播放
         videoView.start()
 
-
+        setMusic()
 
     }
 
@@ -137,13 +137,7 @@ class MainActivity : AppCompatActivity() {
                 // 在这里执行你之前想在 onCreate 中执行的操作：
                 // 例如：loadMusicFiles()
                 // Log.d("MainActivity", "权限获取成功，开始加载音乐")
-                 musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
-                   audioPlayer = AudioPlayerImpl( this, musicDirectory.name)
-                // 获取 Music 文件夹的绝对路径 (String)
-                 musicPath = musicDirectory.absolutePath
-                clickButton.setOnClickListener {
-                    audioPlayer.play(musicPath+"/覃诚芳-还没有爱够.mp3")
-                }
+                setMusic()
 
             } else {
                 // ❌ 权限被拒绝
@@ -165,5 +159,15 @@ class MainActivity : AppCompatActivity() {
         intent.addCategory(Intent.CATEGORY_DEFAULT)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         activity.startActivity(intent)
+    }
+
+    fun setMusic(){
+        musicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC)
+        audioPlayer = AudioPlayerImpl( this, musicDirectory.name)
+        // 获取 Music 文件夹的绝对路径 (String)
+        musicPath = musicDirectory.absolutePath
+        clickButton.setOnClickListener {
+            audioPlayer.play(musicPath+"/覃诚芳-还没有爱够.mp3")
+        }
     }
 }
